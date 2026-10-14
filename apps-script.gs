@@ -51,6 +51,28 @@ var MIXERS = ['Кола', 'Тоник', 'Сок', 'Морс', 'Лимонад', 
 var FOOD = ['Ем всё', 'Не ем свинину', 'Вегетарианец', 'Без острого', 'Есть аллергия'];
 var MUSIC = ['Баварские шлягеры', 'Поп', 'Рок', 'Русские хиты', 'Рэп', 'Электроника', '90-е и нулевые'];
 
+/**
+ * Запустить один раз из редактора (кнопка «Выполнить»; функция стоит первой, поэтому выбрана по умолчанию):
+ * Google спросит разрешение,
+ * скрипт создаст и оформит листы «Ответы» и «Сводка». Повторный запуск пересобирает «Сводку»,
+ * ответы гостей не трогает.
+ */
+function setup() {
+  var ss = book_();
+  formatAnswers_(ensureSheets_());
+  var summary = ss.getSheetByName(SHEET_SUMMARY);
+  summary.clear();
+  buildSummary_(summary);
+
+  // Пустой «Лист1» новой таблицы больше не нужен.
+  ss.getSheets().forEach(function (sh) {
+    if (/^(Лист|Sheet)\d+$/.test(sh.getName()) && sh.getLastRow() === 0 && ss.getSheets().length > 2) {
+      ss.deleteSheet(sh);
+    }
+  });
+  ss.setActiveSheet(ss.getSheetByName(SHEET_ANSWERS));
+}
+
 /** Приём анкеты со страницы. */
 function doPost(e) {
   var lock = LockService.getScriptLock();
@@ -104,27 +126,6 @@ function doPost(e) {
 /** Проверка адреса из браузера: открыть URL веб-приложения — должно ответить ok: true. */
 function doGet() {
   return json_({ ok: true, message: 'Приём анкет работает. Анкеты присылает страница-приглашение.' });
-}
-
-/**
- * Запустить один раз из редактора (кнопка «Выполнить»): Google спросит разрешение,
- * скрипт создаст и оформит листы «Ответы» и «Сводка». Повторный запуск пересобирает «Сводку»,
- * ответы гостей не трогает.
- */
-function setup() {
-  var ss = book_();
-  formatAnswers_(ensureSheets_());
-  var summary = ss.getSheetByName(SHEET_SUMMARY);
-  summary.clear();
-  buildSummary_(summary);
-
-  // Пустой «Лист1» новой таблицы больше не нужен.
-  ss.getSheets().forEach(function (sh) {
-    if (/^(Лист|Sheet)\d+$/.test(sh.getName()) && sh.getLastRow() === 0 && ss.getSheets().length > 2) {
-      ss.deleteSheet(sh);
-    }
-  });
-  ss.setActiveSheet(ss.getSheetByName(SHEET_ANSWERS));
 }
 
 function book_() {
