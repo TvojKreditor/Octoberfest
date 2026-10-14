@@ -1,0 +1,768 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Oktoberfest Birthday Party</title>
+<meta name="description" content="Приглашение на день рождения в баварском стиле — 24 октября 2026, 18:00. Анкета гостя о напитках.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Oktoberfest Birthday Party">
+<meta property="og:description" content="24 октября 2026, 18:00 · Приглашение и анкета гостя">
+<meta name="theme-color" content="#1D62AE">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M7 11h14v14a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2z' fill='%23F2A51F'/%3E%3Cpath d='M21 14h2.5a3 3 0 0 1 3 3v3a3 3 0 0 1-3 3H21' fill='none' stroke='%231D62AE' stroke-width='2'/%3E%3Cpath d='M6 11c-1-3 2-5 4-4 1-2 5-2 6 0 2-1 6 0 5 4z' fill='%23FFFBF2' stroke='%231D62AE' stroke-width='1.5'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya+SC:ital,wght@0,500;0,700;0,800;1,700&amp;family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&amp;family=UnifrakturMaguntia&amp;display=swap">
+<style>
+/* Пивной шатёр: гирлянда ромбовых флажков над героем, пряничное сердце «Alles Gute»,
+   меню праздника, анкета — узкий бланк. Ответы уходят в Google Таблицу хозяина. */
+:root{
+  --bg:#F3F6FA; --surface:#FFFFFF; --surface-2:#E6EDF5; --ink:#2A1C12; --muted:#5F5248;
+  --line:#D3DCE6; --ring:#8496AA; --shadow:rgba(42,28,18,.2);
+  --blue:#1D62AE; --on-blue:#FFFFFF; --blue-soft:#DCE8F6; --raute-a:#FFFFFF; --raute-b:#4C92DB;
+  --amber:#F2A51F; --amber-hover:#E3960C; --on-amber:#2A1C12; --sel:#FFF3D9; --sel-line:#C47F09;
+  --ginger:#8B4A23; --ginger-text:#8B4A23; --icing:#FFF8F1; --pink:#F09AB8;
+  --ok:#23784A; --err:#B42318;
+
+  /* цвета напитков — одинаковые в обеих темах */
+  --c-foam:#FFFBF2; --c-hell:#F4C23C; --c-dunkel:#4A2511; --c-weizen:#EDBE5C; --c-alkfrei:#F6D987;
+  --c-cider:#DDB548; --c-met:#C9831C; --c-vodka:#EEF3F7; --c-rum:#8E4A1B; --c-gin:#D9EEF0;
+  --c-whisky:#C37A2B; --c-cognac:#9A4B16; --c-wwhite:#EFE3A3; --c-wred:#7A1E2C;
+
+  --f-fraktur:"UnifrakturMaguntia","Old English Text MT","Alegreya SC",Georgia,serif;
+  --f-display:"Alegreya SC",Georgia,"Times New Roman",serif;
+  --f-body:"Alegreya Sans","Segoe UI",system-ui,-apple-system,sans-serif;
+  --w-page:1040px; --w-form:760px;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#15110D; --surface:#1F1813; --surface-2:#29201A; --ink:#F4EADF; --muted:#BCAA99;
+    --line:#3B3027; --ring:#7A6754; --shadow:rgba(0,0,0,.55);
+    --blue:#7DB6F0; --on-blue:#0F1A26; --blue-soft:#1C2A3A; --raute-a:#1B2F47; --raute-b:#3D7DC4;
+    --amber:#F4B13C; --amber-hover:#F7C062; --on-amber:#21160D; --sel:#33261A; --sel-line:#F4B13C;
+    --ginger:#94522A; --ginger-text:#E3A673; --icing:#FFF3E6; --pink:#F2A3BF;
+    --ok:#7ED3A0; --err:#FF9C8F;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#15110D; --surface:#1F1813; --surface-2:#29201A; --ink:#F4EADF; --muted:#BCAA99;
+  --line:#3B3027; --ring:#7A6754; --shadow:rgba(0,0,0,.55);
+  --blue:#7DB6F0; --on-blue:#0F1A26; --blue-soft:#1C2A3A; --raute-a:#1B2F47; --raute-b:#3D7DC4;
+  --amber:#F4B13C; --amber-hover:#F7C062; --on-amber:#21160D; --sel:#33261A; --sel-line:#F4B13C;
+  --ginger:#94522A; --ginger-text:#E3A673; --icing:#FFF3E6; --pink:#F2A3BF;
+  --ok:#7ED3A0; --err:#FF9C8F;
+  color-scheme:dark;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;padding-bottom:env(safe-area-inset-bottom,0px);background:var(--bg);color:var(--ink);font:400 1.0625rem/1.55 var(--f-body);-webkit-font-smoothing:antialiased}
+h1,h2,h3{margin:0;text-wrap:balance}
+p{margin:0}
+a{color:var(--blue);text-underline-offset:3px}
+button,input,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.wrap{max-width:var(--w-page);margin-inline:auto;padding-inline:clamp(16px,4vw,32px)}
+.wrap.narrow{max-width:calc(var(--w-form) + 64px)}
+.eyebrow{font:500 .9375rem/1.2 var(--f-display);letter-spacing:.08em;color:var(--blue)}
+h2{font:800 clamp(1.875rem,3.6vw,2.5rem)/1.1 var(--f-display);letter-spacing:.01em}
+.pattern-defs{position:absolute;width:0;height:0;overflow:hidden}
+.ra{fill:var(--raute-a)} .rb{fill:var(--raute-b)}
+
+/* кнопки */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:10px 20px;border-radius:8px;border:1.5px solid transparent;font:700 1rem/1.2 var(--f-body);text-decoration:none;cursor:pointer;transition:background-color .15s,border-color .15s,transform .1s}
+.btn:active{transform:translateY(1px)}
+.btn[disabled]{opacity:.6;cursor:not-allowed}
+.btn-amber{background:var(--amber);border-color:var(--amber);color:var(--on-amber)}
+.btn-amber:hover{background:var(--amber-hover);border-color:var(--amber-hover)}
+.btn-ghost{background:transparent;border-color:var(--ring);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--ink)}
+.btn-dashed{width:100%;background:transparent;border:1.5px dashed var(--blue);color:var(--blue)}
+.btn-dashed:hover{background:var(--surface)}
+.btn-lg{min-height:56px;padding:14px 28px;font-size:1.125rem}
+.link-btn{background:none;border:0;padding:2px 0;color:var(--blue);text-decoration:underline;text-underline-offset:3px;cursor:pointer;font-size:.9375rem}
+
+/* ===== герой ===== */
+.hero{padding-top:env(safe-area-inset-top,0px);padding-bottom:clamp(40px,6vw,72px)}
+.garland svg{display:block;width:100%;max-width:100%;height:auto;aspect-ratio:1200/96;min-height:64px}
+.g-rope{fill:none;stroke:var(--muted);stroke-width:2}
+.g-raute{fill:url(#raute);stroke:var(--raute-b);stroke-width:1.2}
+.g-blue{fill:var(--blue)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);grid-template-areas:"copy heart" "ticket ticket" "cta cta";gap:clamp(28px,4vw,44px) clamp(24px,4vw,56px);align-items:center;padding-top:clamp(8px,2vw,20px)}
+.hero-copy{grid-area:copy;display:flex;flex-direction:column;gap:14px;min-width:0}
+.title{display:flex;flex-direction:column;gap:.12em;font-weight:400}
+.title-fr{font:400 clamp(3.25rem,10.5vw,6.75rem)/.95 var(--f-fraktur);color:var(--blue)}
+.title-sub{font:italic 700 clamp(1.625rem,3.8vw,2.5rem)/1.05 var(--f-display);color:var(--ginger-text)}
+.lede{font-size:clamp(1.1875rem,2.2vw,1.375rem);line-height:1.45;max-width:30ch}
+.hero-heart{grid-area:heart;justify-self:center;width:min(100%,320px)}
+.heart{display:block;width:100%;height:auto;transform-origin:50% 2%;animation:swing 6s ease-in-out infinite;filter:drop-shadow(0 14px 18px var(--shadow))}
+@keyframes swing{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}}
+.h-rib{fill:none;stroke:var(--blue);stroke-width:7;stroke-linecap:round;stroke-linejoin:round}
+.h-rib2{fill:none;stroke:var(--icing);stroke-width:2;stroke-dasharray:4 6;stroke-linecap:round}
+.h-body{fill:var(--ginger)}
+.h-edge{fill:none;stroke:var(--icing);stroke-width:7;stroke-linecap:round;stroke-dasharray:0 13}
+.h-pink{fill:none;stroke:var(--pink);stroke-width:3.5;stroke-linecap:round}
+.h-t1{font-family:var(--f-fraktur);font-size:42px;fill:var(--icing)}
+.h-t2{font-family:var(--f-fraktur);font-size:25px;fill:var(--icing)}
+.h-t3{font-family:var(--f-display);font-weight:800;font-size:20px;letter-spacing:.1em;fill:var(--pink)}
+
+.ticket{grid-area:ticket;position:relative;margin:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));background:var(--surface);border:1.5px solid var(--line);border-radius:6px}
+.t-cell{display:flex;flex-direction:column;gap:6px;padding:20px 20px 18px;min-width:0}
+.t-cell+.t-cell{border-left:2px dashed var(--line)}
+.t-cell dt{font:500 .875rem/1.2 var(--f-display);letter-spacing:.08em;color:var(--muted)}
+.t-cell dd{margin:0;display:flex;flex-direction:column;gap:3px}
+.t-main{font:800 1.375rem/1.15 var(--f-display);font-variant-numeric:tabular-nums}
+.t-sub{color:var(--muted);font-size:.9375rem}
+.t-links{display:flex;flex-wrap:wrap;align-items:center;gap:2px 16px;margin-top:6px;font-size:.9375rem}
+.t-status{font-size:.875rem;color:var(--ok)}
+.t-status:empty{display:none}
+.stamp{position:absolute;top:-15px;right:18px;transform:rotate(-6deg);font:800 .875rem/1 var(--f-display);letter-spacing:.16em;color:var(--blue);background:var(--bg);border:2px solid var(--blue);border-radius:4px;padding:6px 10px 5px}
+.hero-cta{grid-area:cta;display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px}
+.cta-note{color:var(--muted);font-size:.9375rem}
+
+@media (max-width:820px){
+  .hero-grid{grid-template-columns:minmax(0,1fr);grid-template-areas:"heart" "copy" "ticket" "cta"}
+  .hero-heart{width:min(220px,58vw)}
+}
+@media (max-width:700px){
+  .ticket{grid-template-columns:minmax(0,1fr)}
+  .t-cell+.t-cell{border-left:0;border-top:2px dashed var(--line)}
+}
+
+/* ===== что будет ===== */
+.block{padding-block:clamp(44px,6vw,72px) clamp(44px,6vw,64px)}
+.block-head{display:flex;flex-direction:column;gap:6px;margin-bottom:24px;max-width:62ch}
+.menu{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.menu li{background:var(--surface);padding:22px 20px 24px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.ico{width:44px;height:44px;color:var(--blue);fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.m-de{font:700 .9375rem/1.2 var(--f-display);letter-spacing:.04em;color:var(--ginger-text)}
+.m-ru{font-weight:500;line-height:1.35}
+.dress{margin-top:20px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px 24px;align-items:start;background:var(--blue-soft);border-radius:6px;padding:24px clamp(18px,3vw,32px)}
+.dress .ico{width:56px;height:56px}
+.dress h3{font:800 1.5rem/1.15 var(--f-display);margin-top:2px}
+.dress p{max-width:58ch;margin-top:6px}
+@media (max-width:760px){.menu{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:420px){.dress{grid-template-columns:minmax(0,1fr)}}
+
+/* ===== анкета ===== */
+.anketa{background:var(--surface-2);border-top:1px solid var(--line);padding-block:clamp(44px,6vw,72px)}
+.intro{color:var(--muted);margin-top:4px}
+.cards{display:flex;flex-direction:column;gap:20px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:clamp(18px,3vw,28px);display:flex;flex-direction:column;gap:24px}
+.card-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;padding-bottom:14px;border-bottom:2px dashed var(--line)}
+.card-head h3{font:800 1.375rem/1.2 var(--f-display)}
+.card-n{color:var(--muted);font-size:.9375rem}
+.card-head .link-btn{margin-left:auto}
+.field{border:0;margin:0;padding:0;min-width:0;display:flex;flex-direction:column;gap:10px}
+.q{display:flex;align-items:center;gap:10px;padding:0;font:700 1.125rem/1.3 var(--f-body)}
+legend.q{float:none;width:100%;margin-bottom:10px}
+.qn{flex:none;display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--blue);color:var(--on-blue);font:800 .875rem/1 var(--f-display)}
+.opt{font-weight:400;font-size:.9375rem;color:var(--muted)}
+.hint{color:var(--muted);font-size:.9375rem;margin-top:-2px}
+.key{align-self:flex-start;background:var(--sel);border-radius:4px;padding:6px 10px;font-size:.9375rem;color:var(--ink);margin-top:-2px}
+.key b{font-weight:700}
+.input{width:100%;min-width:0;background:var(--surface);border:1.5px solid var(--ring);border-radius:6px;padding:12px 14px;line-height:1.4}
+.input::placeholder{color:var(--muted);opacity:.85}
+.input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-soft)}
+textarea.input{resize:vertical;min-height:92px}
+.tiles{display:grid;gap:10px}
+.tiles.c3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.tiles.c4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.tile{position:relative;display:flex;align-items:center;gap:10px;min-height:54px;padding:10px 30px 10px 12px;background:var(--surface);border:1.5px solid var(--line);border-radius:8px;cursor:pointer;line-height:1.25;min-width:0;transition:border-color .15s,background-color .15s}
+.tile:hover{border-color:var(--ring)}
+.tile input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
+.tile-t{min-width:0}
+.tile:has(input:checked){background:var(--sel);border-color:var(--sel-line)}
+.tile:has(input:checked) .tile-t{font-weight:700}
+.tile:has(input:checked)::after{content:"";position:absolute;top:50%;right:12px;width:6px;height:12px;margin-top:-8px;border:solid var(--sel-line);border-width:0 2.5px 2.5px 0;transform:rotate(45deg)}
+.tile:has(input:focus-visible){outline:3px solid var(--blue);outline-offset:2px}
+.sw{flex:none;width:20px;height:20px;border-radius:50%;background:var(--c);box-shadow:0 0 0 1.5px var(--ring)}
+.sw-glass{width:16px;height:24px;border-radius:2px 2px 5px 5px;background:linear-gradient(to bottom,var(--c-foam) 0 30%,var(--c) 30% 100%)}
+.sw-none{background:transparent;box-shadow:none;border:1.5px dashed var(--ring)}
+.err{color:var(--err);font-size:.9375rem;font-weight:500}
+.err:empty{display:none}
+.field.invalid .q{color:var(--err)}
+.field.invalid .input{border-color:var(--err)}
+.field.invalid .tile{border-color:var(--err)}
+.add-row{margin-top:16px;display:flex;flex-direction:column;gap:8px}
+.add-hint{color:var(--muted);font-size:.9375rem}
+.submit-row{margin-top:28px;display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px}
+.form-msg{color:var(--err);font-weight:500}
+.form-msg:empty{display:none}
+@media (max-width:700px){.tiles.c3,.tiles.c4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.tiles.c3,.tiles.c4{grid-template-columns:minmax(0,1fr)}.tile{min-height:48px}}
+
+/* после отправки */
+.done{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:clamp(20px,3.4vw,32px);display:flex;flex-direction:column;gap:22px}
+.done:focus{outline:none}
+.done-top{display:flex;align-items:center;gap:20px}
+.done-top h3{font:800 1.625rem/1.15 var(--f-display)}
+.done-top p{margin-top:6px;max-width:52ch}
+.deckel{flex:none;width:104px;height:104px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--surface-2);box-shadow:inset 0 0 0 4px var(--surface),inset 0 0 0 6px var(--blue)}
+.deckel span{font:400 1.75rem/1 var(--f-fraktur);color:var(--blue)}
+.deckel small{margin-top:6px;font:700 .75rem/1 var(--f-display);letter-spacing:.12em;color:var(--muted);font-variant-numeric:tabular-nums}
+.done.unsent .deckel{box-shadow:inset 0 0 0 4px var(--surface),inset 0 0 0 6px var(--sel-line)}
+.done.unsent .deckel span{color:var(--ginger-text)}
+.done-list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.done-list li{display:flex;flex-direction:column;gap:2px;padding:12px 0;border-bottom:1px solid var(--line)}
+.done-list span{color:var(--muted);font-size:.9375rem}
+.share{display:flex;flex-direction:column;gap:10px}
+.share .q{font-size:1rem}
+.mono{font:.9375rem/1.5 ui-monospace,"Cascadia Mono",Consolas,"Courier New",monospace;background:var(--surface-2)}
+.share-actions,.done-actions{display:flex;flex-wrap:wrap;gap:10px}
+.status{font-size:.9375rem;color:var(--ok)}
+.status:empty{display:none}
+.status.bad{color:var(--err)}
+@media (max-width:480px){.done-top{flex-direction:column;align-items:flex-start}}
+
+/* ===== подвал ===== */
+.band{display:block;width:100%;height:16px}
+.foot-in{padding-block:40px 48px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px}
+.foot-ru{font:italic 700 clamp(1.5rem,3.6vw,2.25rem)/1.15 var(--f-display);color:var(--blue)}
+.foot-de{font:400 clamp(2.75rem,6vw,3.75rem)/1 var(--f-fraktur);color:var(--ginger-text)}
+.foot-small{color:var(--muted);font-size:.9375rem}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .heart{animation:none}
+  .btn,.tile{transition:none}
+}
+</style>
+</head>
+<body>
+
+<svg class="pattern-defs" aria-hidden="true" focusable="false">
+  <defs>
+    <pattern id="raute" width="26" height="16" patternUnits="userSpaceOnUse">
+      <rect class="ra" width="26" height="16"/>
+      <path class="rb" d="M13 0 26 8 13 16 0 8Z"/>
+    </pattern>
+  </defs>
+</svg>
+
+<header class="hero">
+  <div class="garland" aria-hidden="true"><svg id="garland" viewBox="0 0 1200 96" preserveAspectRatio="xMidYMin slice" focusable="false"></svg></div>
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow">Приглашение на день рождения</p>
+      <h1 class="title"><span class="title-fr" lang="de">Oktoberfest</span><span class="title-sub" lang="en">Birthday Party</span></h1>
+      <p class="lede">Друзья, приглашаю вас отметить мой день рождения в баварском стиле!</p>
+    </div>
+
+    <div class="hero-heart">
+      <svg class="heart" viewBox="0 0 300 340" role="img" aria-label="Пряничное сердце с надписью Alles Gute zum Geburtstag — С днём рождения">
+        <g transform="translate(0 70)">
+          <path class="h-rib" d="M116 40 150 -62 184 40"/>
+          <path class="h-rib2" d="M116 40 150 -62 184 40"/>
+          <path class="h-body" d="M150 262C92 222 18 170 18 98C18 52 52 22 94 22C122 22 140 38 150 58C160 38 178 22 206 22C248 22 282 52 282 98C282 170 208 222 150 262Z"/>
+          <path class="h-pink" transform="translate(9 8.4) scale(.94)" d="M150 262C92 222 18 170 18 98C18 52 52 22 94 22C122 22 140 38 150 58C160 38 178 22 206 22C248 22 282 52 282 98C282 170 208 222 150 262Z"/>
+          <path class="h-edge" transform="translate(21 19.6) scale(.86)" d="M150 262C92 222 18 170 18 98C18 52 52 22 94 22C122 22 140 38 150 58C160 38 178 22 206 22C248 22 282 52 282 98C282 170 208 222 150 262Z"/>
+          <text class="h-t1" x="150" y="132" text-anchor="middle">Alles Gute</text>
+          <text class="h-t2" x="150" y="170" text-anchor="middle">zum Geburtstag</text>
+          <text class="h-t3" x="150" y="210" text-anchor="middle">24 · 10</text>
+        </g>
+      </svg>
+    </div>
+
+    <dl class="ticket">
+      <span class="stamp" lang="de" aria-hidden="true">Reserviert</span>
+      <div class="t-cell">
+        <dt>Когда</dt>
+        <dd>
+          <span class="t-main">24 октября 2026</span>
+          <span class="t-sub">суббота, начало в 18:00</span>
+          <span class="t-links"><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Oktoberfest%20Birthday%20Party&amp;dates=20261024T180000/20261024T230000&amp;location=Орбитальная,%2090&amp;details=День%20рождения%20в%20баварском%20стиле.%20Начало%20в%2018:00." target="_blank" rel="noopener">Добавить в Google Календарь</a></span>
+        </dd>
+      </div>
+      <div class="t-cell">
+        <dt>Где</dt>
+        <dd>
+          <span class="t-main">У меня дома</span>
+          <span class="t-sub" id="addr">Орбитальная, 90</span>
+          <span class="t-links">
+            <a href="https://yandex.ru/maps/?text=Орбитальная%2090" target="_blank" rel="noopener">Открыть на карте</a>
+            <button type="button" class="link-btn" id="copy-addr">Скопировать адрес</button>
+          </span>
+          <span class="t-status" id="addr-msg" role="status"></span>
+        </dd>
+      </div>
+      <div class="t-cell">
+        <dt>До первой кружки</dt>
+        <dd>
+          <span class="t-main" id="cd">10 дней</span>
+          <span class="t-sub"><span lang="de">O'zapft is!</span> — «бочка открыта!»</span>
+        </dd>
+      </div>
+    </dl>
+
+    <div class="hero-cta">
+      <a class="btn btn-amber btn-lg" href="#anketa">Заполнить анкету</a>
+      <span class="cta-note">Четыре вопроса о напитках — займёт минуту</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="wrap block" aria-labelledby="menu-h">
+    <div class="block-head">
+      <p class="eyebrow" lang="de">Was gibt's?</p>
+      <h2 id="menu-h">Что будет</h2>
+    </div>
+    <ul class="menu">
+      <li>
+        <svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><path d="M7 11h14v14a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2z"/><path d="M21 14h2.5a3 3 0 0 1 3 3v3a3 3 0 0 1-3 3H21"/><path d="M6.6 11c-.9-2.6 1.6-4.4 3.6-3.4 1-2 4.4-2.3 5.6-.3 1.8-1 5.3-.4 5.1 3.7"/><path d="M11 15v8M15 15v8"/></svg>
+        <span class="m-de" lang="de">Bier &amp; Schnaps</span>
+        <span class="m-ru">Пиво и крепкий алкоголь</span>
+      </li>
+      <li>
+        <svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 13c0-4.5-3.5-7-7-5.5C4.5 9.5 4 17 7.5 21.5c2.6 3.4 14.4 3.4 17 0C28 17 27.5 9.5 23 7.5c-3.5-1.5-7 1-7 5.5z"/><path d="M16 13c0 4-2.5 7.5-6 9.6M16 13c0 4 2.5 7.5 6 9.6"/><path d="M10.5 12h.01M21.5 12h.01M12.6 18.5h.01M19.4 18.5h.01"/></svg>
+        <span class="m-de" lang="de">Würstl &amp; Brezn</span>
+        <span class="m-ru">Немецкие колбаски, брецели и много вкусной еды</span>
+      </li>
+      <li>
+        <svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><path d="M10 6h12v6a6 6 0 0 1-12 0z"/><path d="M10 8H7a3 3 0 0 0 3.6 5M22 8h3a3 3 0 0 1-3.6 5"/><path d="M16 18v4.5M11 26.5h10M12.5 26.5v-2.5h7v2.5"/></svg>
+        <span class="m-de" lang="de">Spiele &amp; Preise</span>
+        <span class="m-ru">Весёлые конкурсы и призы</span>
+      </li>
+      <li>
+        <svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><path d="M5.5 26.5h21M7 26.5V18a1.5 1.5 0 0 1 1.5-1.5h15A1.5 1.5 0 0 1 25 18v8.5"/><path d="M7 20.5c1.5 1.4 3 1.4 4.5 0s3-1.4 4.5 0 3 1.4 4.5 0 3-1.4 4.5 0"/><path d="M11 16.5V12M16 16.5V12M21 16.5V12"/><path d="M11 9.6c-.7-.7-.4-1.7 0-2.6.4.9.7 1.9 0 2.6zM16 9.6c-.7-.7-.4-1.7 0-2.6.4.9.7 1.9 0 2.6zM21 9.6c-.7-.7-.4-1.7 0-2.6.4.9.7 1.9 0 2.6z"/></svg>
+        <span class="m-de" lang="de">Geburtstagstorte</span>
+        <span class="m-ru">Праздничный торт</span>
+      </li>
+    </ul>
+
+    <div class="dress">
+      <svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><path d="M5 33c6 4.2 32 4.2 38 0"/><path d="M11.5 32.5c0-9.5 4.5-15.5 12.5-15.5s12.5 6 12.5 15.5"/><path d="M12.2 27.6c7.4 1.7 16.2 1.7 23.6 0"/><path d="M31.5 22.5C34.8 17 38.4 11.6 42 7.5M36.2 16.4l3.6.9M34 19.4l3.4 1.3M38.6 12.9l3 .6"/></svg>
+      <div>
+        <p class="eyebrow" lang="de">Tracht</p>
+        <h3>Дресс-код</h3>
+        <p>Клетчатые рубашки, подтяжки, шляпы и всё в баварском духе. Если нет костюма — просто приходи с хорошим настроением!</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="anketa" id="anketa" aria-labelledby="form-h">
+    <div class="wrap narrow">
+      <div class="block-head">
+        <p class="eyebrow" lang="de">Fragebogen</p>
+        <h2 id="form-h">Анкета гостя</h2>
+        <p class="intro">Расскажите, что вам налить, — так я точно ничего не забуду купить. Идёте не одни? Заполните анкету и за спутника: вопросы те же.</p>
+      </div>
+
+      <form id="rsvp" novalidate aria-labelledby="form-h">
+        <div class="cards" id="cards"></div>
+        <div class="add-row">
+          <button type="button" class="btn btn-dashed" id="add">+ Заполнить за другого человека</button>
+          <p class="add-hint">Те же четыре вопроса — для того, кто придёт с вами.</p>
+        </div>
+        <div class="submit-row">
+          <button type="submit" class="btn btn-amber btn-lg" id="send">Отправить анкету</button>
+          <p class="form-msg" id="form-msg" role="status" aria-live="polite"></p>
+        </div>
+      </form>
+
+      <div class="done" id="done" hidden tabindex="-1" aria-labelledby="done-h">
+        <div class="done-top">
+          <div class="deckel" aria-hidden="true"><span lang="de">Prost!</span><small>24·10·26</small></div>
+          <div><h3 id="done-h">Записано. Prost!</h3><p id="done-text"></p></div>
+        </div>
+        <ul class="done-list" id="done-list"></ul>
+        <div class="share" id="share" hidden>
+          <div class="share-actions" id="retry-row">
+            <button type="button" class="btn btn-amber" id="retry">Отправить ещё раз</button>
+          </div>
+          <label class="q" for="out">Текст для отправки в мессенджер</label>
+          <textarea class="input mono" id="out" rows="9" readonly></textarea>
+          <div class="share-actions">
+            <button type="button" class="btn btn-ghost" id="copy-out">Скопировать текст</button>
+            <a class="btn btn-ghost" id="tg" href="https://t.me/share/url" target="_blank" rel="noopener">Поделиться в Telegram</a>
+          </div>
+          <p class="status" id="copy-msg" role="status"></p>
+        </div>
+        <div class="done-actions">
+          <button type="button" class="btn btn-ghost" id="edit">Изменить ответ</button>
+          <button type="button" class="btn btn-ghost" id="again">Новая анкета</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <svg class="band" aria-hidden="true" focusable="false"><rect width="100%" height="100%" fill="url(#raute)"/></svg>
+  <div class="wrap foot-in">
+    <p class="foot-ru">Жду всех на вечеринке!</p>
+    <p class="foot-de" lang="de">Prost!</p>
+    <p class="foot-small">Будет весело · 24 октября 2026, 18:00 · Орбитальная, 90</p>
+  </div>
+</footer>
+
+<script>
+/* ==================================================================
+   НАСТРОЙКА — адрес веб-приложения Google Apps Script.
+   Вставьте его между кавычками в строке ниже.
+   Адрес выглядит так: https://script.google.com/macros/s/AKfy…/exec
+   Пока кавычки пустые, страница не отправляет ответы сама,
+   а предлагает гостю скопировать текст и прислать его в мессенджер.
+   ================================================================== */
+var SHEET_ENDPOINT = '';
+</script>
+
+<script>
+(function(){
+  'use strict';
+
+  var FOAM = [
+    {v:'Пиво светлое', c:'--c-hell', glass:true},
+    {v:'Пиво тёмное', c:'--c-dunkel', glass:true},
+    {v:'Пиво пшеничное', c:'--c-weizen', glass:true},
+    {v:'Пиво безалкогольное', c:'--c-alkfrei', glass:true},
+    {v:'Сидр', c:'--c-cider'},
+    {v:'Медовуха', c:'--c-met'}
+  ];
+  var STRONG = [
+    {v:'Водка', c:'--c-vodka'},
+    {v:'Ром', c:'--c-rum'},
+    {v:'Джин', c:'--c-gin'},
+    {v:'Виски или бренди', c:'--c-whisky'},
+    {v:'Коньяк', c:'--c-cognac'},
+    {v:'Вино белое', c:'--c-wwhite'},
+    {v:'Вино красное', c:'--c-wred'},
+    {v:'Только пенное', c:null}
+  ];
+  var MAX_PEOPLE = 8;
+  var DRAFT_KEY = 'okt26-anketa-v2';
+  var EVENT = 'oktoberfest-2026';
+  var START = new Date(2026, 9, 24, 18, 0, 0);
+  var API = String(window.SHEET_ENDPOINT || '').trim();
+  var CONFIGURED = /^https?:\/\/[^\s'"]+$/.test(API);
+  var reduceMotion = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+  function $(s){ return document.querySelector(s); }
+  function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  function clean(s){ return String(s || '').replace(/\s+/g, ' ').trim().slice(0, 60); }
+  function oneLine(s){ return String(s || '').replace(/\s*\n+\s*/g, ' ').trim(); }
+  function newId(){ return 'g' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7); }
+  function sleep(ms){ return new Promise(function(r){ setTimeout(r, ms); }); }
+  function plural(n, one, few, many){
+    var a = n % 10, b = n % 100;
+    if (a === 1 && b !== 11) return one;
+    if (a >= 2 && a <= 4 && (b < 12 || b > 14)) return few;
+    return many;
+  }
+
+  /* ---------- гирлянда ---------- */
+  (function(){
+    var svg = document.getElementById('garland'); if (!svg) return;
+    var N = 17, html = '<path class="g-rope" d="M0 8Q600 64 1200 8"/>';
+    for (var i = 0; i < N; i++) {
+      var t = (i + .5) / N, x = 1200 * t, y = 8 + 112 * t * (1 - t);
+      var a = Math.atan((112 - 224 * t) / 1200) * 180 / Math.PI;
+      html += '<polygon class="' + (i % 2 ? 'g-blue' : 'g-raute') + '" points="' +
+        (x - 27).toFixed(1) + ',' + y.toFixed(1) + ' ' + (x + 27).toFixed(1) + ',' + y.toFixed(1) + ' ' +
+        x.toFixed(1) + ',' + (y + 56).toFixed(1) + '" transform="rotate(' + a.toFixed(2) + ' ' + x.toFixed(1) + ' ' + y.toFixed(1) + ')"/>';
+    }
+    svg.innerHTML = html;
+  })();
+
+  /* ---------- обратный отсчёт ---------- */
+  var cdEl = $('#cd');
+  function tick(){
+    var ms = START - Date.now();
+    if (ms <= 0) { cdEl.textContent = 'Праздник начался!'; return; }
+    var hours = Math.floor(ms / 3600000), d = Math.floor(hours / 24), h = hours % 24, m = Math.floor(ms / 60000) % 60;
+    cdEl.textContent = d > 0
+      ? d + ' ' + plural(d, 'день', 'дня', 'дней') + (h ? ' ' + h + ' ' + plural(h, 'час', 'часа', 'часов') : '')
+      : (h ? h + ' ' + plural(h, 'час', 'часа', 'часов') + ' ' : '') + m + ' мин';
+  }
+  tick(); setInterval(tick, 30000);
+
+  /* ---------- копирование ---------- */
+  function flash(el, text, bad){
+    el.textContent = text; el.classList.toggle('bad', !!bad);
+    clearTimeout(el._t); el._t = setTimeout(function(){ el.textContent = ''; }, 6000);
+  }
+  function copyText(text, onFail, msgEl, okText){
+    var p;
+    try { p = navigator.clipboard.writeText(text); } catch (e) { p = Promise.reject(e); }
+    return Promise.resolve(p).then(function(){ flash(msgEl, okText); return true; }, function(){
+      if (onFail) onFail();
+      flash(msgEl, 'Текст выделен — скопируйте его вручную: Ctrl+C или «Копировать» в меню.', true);
+      return false;
+    });
+  }
+  $('#copy-addr').addEventListener('click', function(){
+    copyText('Орбитальная, 90', function(){
+      var r = document.createRange(); r.selectNodeContents($('#addr'));
+      var s = getSelection(); s.removeAllRanges(); s.addRange(r);
+    }, $('#addr-msg'), 'Адрес скопирован');
+  });
+
+  /* ---------- анкета ---------- */
+  function blank(){ return {id:newId(), name:'', foam:'', strong:'', wishes:'', createdAt:''}; }
+  function fresh(){ return {entries:[blank()], group:newId(), savedIds:[], view:'form', saved:false, sentOnce:false, updated:false}; }
+  var state = fresh();
+
+  function loadDraft(){
+    try {
+      var raw = localStorage.getItem(DRAFT_KEY); if (!raw) return null;
+      var d = JSON.parse(raw);
+      if (!d || !Array.isArray(d.entries) || !d.entries.length) return null;
+      var entries = d.entries.slice(0, MAX_PEOPLE).map(function(e){
+        var b = blank();
+        return {
+          id: /^[A-Za-z0-9]{4,40}$/.test(e && e.id) ? e.id : b.id,
+          name: String(e.name || ''), foam: String(e.foam || ''), strong: String(e.strong || ''),
+          wishes: String(e.wishes || ''), createdAt: String(e.createdAt || '')
+        };
+      });
+      return {
+        entries: entries,
+        group: /^[A-Za-z0-9]{4,40}$/.test(d.group) ? d.group : newId(),
+        savedIds: Array.isArray(d.savedIds) ? d.savedIds.filter(function(x){ return /^[A-Za-z0-9]{4,40}$/.test(x); }) : [],
+        view: d.view === 'done' ? 'done' : 'form',
+        saved: !!d.saved, sentOnce: !!d.sentOnce, updated: !!d.updated
+      };
+    } catch (e) { return null; }
+  }
+  var draftT;
+  function saveDraft(){
+    clearTimeout(draftT);
+    draftT = setTimeout(function(){ try { localStorage.setItem(DRAFT_KEY, JSON.stringify(state)); } catch (e) {} }, 250);
+  }
+
+  var formEl = $('#rsvp'), cardsEl = $('#cards'), addBtn = $('#add'), sendBtn = $('#send'), formMsg = $('#form-msg');
+  var doneEl = $('#done'), doneH = $('#done-h'), doneText = $('#done-text'), doneList = $('#done-list');
+  var shareEl = $('#share'), outEl = $('#out'), tgEl = $('#tg'), copyMsg = $('#copy-msg');
+  var retryRow = $('#retry-row'), retryBtn = $('#retry');
+
+  function tile(e, field, o, k){
+    var id = field + '-' + e.id + '-' + k, on = e[field] === o.v;
+    var sw = o.c
+      ? '<span class="sw' + (o.glass ? ' sw-glass' : '') + '" style="--c:var(' + o.c + ')"></span>'
+      : '<span class="sw sw-none"></span>';
+    return '<label class="tile" for="' + id + '"><input type="radio" id="' + id + '" name="' + field + '-' + e.id +
+      '" value="' + esc(o.v) + '"' + (on ? ' checked' : '') + '>' + sw + '<span class="tile-t">' + esc(o.v) + '</span></label>';
+  }
+  function cardHTML(e, i){
+    var self = i === 0, id = e.id;
+    return '<article class="card" data-id="' + id + '" aria-labelledby="h-' + id + '">' +
+      '<header class="card-head"><h3 id="h-' + id + '">' + (self ? 'Ваша анкета' : 'За другого человека') + '</h3>' +
+        (self ? '' : '<span class="card-n">Гость №' + (i + 1) + '</span><button type="button" class="link-btn" data-rm="' + id + '">Убрать</button>') +
+      '</header>' +
+      '<div class="field" data-f="name">' +
+        '<label class="q" for="name-' + id + '"><span class="qn">1</span>Имя</label>' +
+        '<input class="input" id="name-' + id + '" type="text" maxlength="60" autocomplete="' + (self ? 'given-name' : 'off') +
+          '" placeholder="' + (self ? 'Как вас зовут' : 'Как зовут гостя') + '" value="' + esc(e.name) + '" aria-describedby="err-name-' + id + '">' +
+        '<p class="err" id="err-name-' + id + '"></p>' +
+      '</div>' +
+      '<fieldset class="field" data-f="foam" aria-describedby="key-' + id + ' err-foam-' + id + '">' +
+        '<legend class="q"><span class="qn">2</span>Пенный напиток</legend>' +
+        '<p class="key" id="key-' + id + '">Это будет <b>основной напиток на весь вечер</b> — и для конкурсов тоже.</p>' +
+        '<div class="tiles c3">' + FOAM.map(function(o, k){ return tile(e, 'foam', o, k); }).join('') + '</div>' +
+        '<p class="err" id="err-foam-' + id + '"></p>' +
+      '</fieldset>' +
+      '<fieldset class="field" data-f="strong" aria-describedby="hint-' + id + ' err-strong-' + id + '">' +
+        '<legend class="q"><span class="qn">3</span>Напиток для тостов</legend>' +
+        '<p class="hint" id="hint-' + id + '">Крепкое или вино — к праздничному столу и тостам.</p>' +
+        '<div class="tiles c4">' + STRONG.map(function(o, k){ return tile(e, 'strong', o, k); }).join('') + '</div>' +
+        '<p class="err" id="err-strong-' + id + '"></p>' +
+      '</fieldset>' +
+      '<div class="field" data-f="wishes">' +
+        '<label class="q" for="wishes-' + id + '"><span class="qn">4</span>Пожелания <span class="opt">необязательно</span></label>' +
+        '<textarea class="input" id="wishes-' + id + '" rows="3" maxlength="500" placeholder="Любимая закуска, музыка, аллергии — всё, что мне стоит знать">' + esc(e.wishes) + '</textarea>' +
+      '</div>' +
+    '</article>';
+  }
+  function renderCards(){
+    cardsEl.innerHTML = state.entries.map(cardHTML).join('');
+    var full = state.entries.length >= MAX_PEOPLE;
+    addBtn.disabled = full;
+    addBtn.textContent = full ? 'Максимум — ' + MAX_PEOPLE + ' человек в одной анкете' : '+ Заполнить за другого человека';
+  }
+  function readCards(){
+    state.entries.forEach(function(e){
+      var n = document.getElementById('name-' + e.id); if (!n) return;
+      e.name = n.value;
+      var f = formEl.querySelector('input[name="foam-' + e.id + '"]:checked'); e.foam = f ? f.value : '';
+      var s = formEl.querySelector('input[name="strong-' + e.id + '"]:checked'); e.strong = s ? s.value : '';
+      e.wishes = document.getElementById('wishes-' + e.id).value;
+    });
+  }
+  function fieldError(e, key){
+    if (key === 'name') return clean(e.name) ? '' : 'Напишите имя';
+    if (key === 'foam') return e.foam ? '' : 'Выберите пенный напиток';
+    if (key === 'strong') return e.strong ? '' : 'Выберите напиток для тостов';
+    return '';
+  }
+  function showError(e, key, text){
+    var p = document.getElementById('err-' + key + '-' + e.id); if (!p) return;
+    p.textContent = text;
+    p.closest('.field').classList.toggle('invalid', !!text);
+    if (key === 'name') document.getElementById('name-' + e.id).setAttribute('aria-invalid', text ? 'true' : 'false');
+  }
+  function validate(){
+    var first = null;
+    state.entries.forEach(function(e){
+      ['name', 'foam', 'strong'].forEach(function(key){
+        var text = fieldError(e, key); showError(e, key, text);
+        if (text && !first) first = key === 'name' ? document.getElementById('name-' + e.id) : formEl.querySelector('input[name="' + key + '-' + e.id + '"]');
+      });
+    });
+    if (first) { first.focus({preventScroll:true}); first.scrollIntoView({block:'center', behavior: reduceMotion ? 'auto' : 'smooth'}); }
+    return !first;
+  }
+  function onEdit(ev){
+    readCards();
+    var field = ev.target.closest('.field'), card = ev.target.closest('.card');
+    if (field && card && field.classList.contains('invalid')) {
+      var e = state.entries.filter(function(x){ return x.id === card.dataset.id; })[0];
+      if (e && !fieldError(e, field.dataset.f)) showError(e, field.dataset.f, '');
+    }
+    if (formMsg.textContent && !formEl.querySelector('.field.invalid')) formMsg.textContent = '';
+    saveDraft();
+  }
+  cardsEl.addEventListener('input', onEdit);
+  cardsEl.addEventListener('change', onEdit);
+  cardsEl.addEventListener('click', function(ev){
+    var b = ev.target.closest('[data-rm]'); if (!b) return;
+    readCards();
+    state.entries = state.entries.filter(function(e){ return e.id !== b.dataset.rm; });
+    renderCards(); saveDraft(); addBtn.focus();
+  });
+  addBtn.addEventListener('click', function(){
+    readCards();
+    if (state.entries.length >= MAX_PEOPLE) return;
+    var e = blank(); state.entries.push(e);
+    renderCards(); saveDraft();
+    var inp = document.getElementById('name-' + e.id);
+    if (inp) { inp.focus({preventScroll:true}); inp.closest('.card').scrollIntoView({block:'start', behavior: reduceMotion ? 'auto' : 'smooth'}); }
+  });
+
+  function buildMessage(list){
+    var lead = clean(list[0].name);
+    var blocks = list.map(function(e, i){
+      var rows = ['Имя: ' + clean(e.name), 'Пенное: ' + e.foam, 'Для тостов: ' + e.strong, 'Пожелания: ' + (oneLine(e.wishes) || '—')];
+      if (i > 0 && lead) rows.push('Заполнил(а): ' + lead);
+      return rows.join('\n');
+    });
+    return ['Oktoberfest Birthday Party — анкета', '24.10.2026, 18:00 · Орбитальная, 90', ''].join('\n') + blocks.join('\n\n');
+  }
+  function tgLink(msg){
+    var lines = msg.split('\n');
+    return 'https://t.me/share/url?url=' + encodeURIComponent(lines[0]) + '&text=' + encodeURIComponent(lines.slice(1).join('\n'));
+  }
+
+  /* ---------- отправка в Google Таблицу ----------
+     Тип text/plain делает запрос «простым»: браузер не шлёт предварительный OPTIONS,
+     которого Apps Script не понимает. Ответ приходит после переадресации на googleusercontent.com. */
+  function postOnce(body){
+    var ctrl = typeof AbortController === 'function' ? new AbortController() : null;
+    var timer = ctrl ? setTimeout(function(){ ctrl.abort(); }, 25000) : 0;
+    return fetch(API, {
+      method: 'POST', body: body, redirect: 'follow', cache: 'no-store', credentials: 'omit',
+      headers: {'Content-Type': 'text/plain;charset=utf-8'},
+      signal: ctrl ? ctrl.signal : undefined
+    }).then(function(r){
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    }).then(function(res){ clearTimeout(timer); return res; }, function(err){ clearTimeout(timer); throw err; });
+  }
+  function sendToSheet(){
+    if (!CONFIGURED) return Promise.resolve(false);
+    var now = new Date().toISOString(), lead = clean(state.entries[0].name);
+    var keep = state.entries.map(function(e){ return e.id; });
+    var body = JSON.stringify({
+      event: EVENT, group: state.group, sentAt: now,
+      entries: state.entries.map(function(e, i){
+        return {
+          id: e.id, name: clean(e.name), foam: e.foam, strong: e.strong,
+          wishes: String(e.wishes || '').trim().slice(0, 500), filledBy: i === 0 ? '' : lead,
+          createdAt: e.createdAt || now, updatedAt: now
+        };
+      }),
+      removedIds: state.savedIds.filter(function(id){ return keep.indexOf(id) < 0; })
+    });
+    // Повтор безопасен: скрипт обновляет строки по id, а не дописывает новые.
+    return postOnce(body)
+      .catch(function(){ return sleep(1500).then(function(){ return postOnce(body); }); })
+      .then(function(res){
+        if (res && res.ok === true) {
+          state.entries.forEach(function(e){ e.createdAt = e.createdAt || now; });
+          state.savedIds = keep;
+          return true;
+        }
+        console.warn('Таблица не приняла анкету:', res && res.error);
+        return false;
+      })
+      .catch(function(err){ console.warn('Анкета не отправилась:', err && (err.message || err)); return false; });
+  }
+
+  function submit(btn, idleText){
+    btn.disabled = true; btn.textContent = 'Отправляю…';
+    var wasSent = state.sentOnce;
+    return sendToSheet().then(function(saved){
+      btn.disabled = false; btn.textContent = idleText;
+      state.saved = saved; state.view = 'done';
+      if (saved) { state.updated = wasSent; state.sentOnce = true; }
+      saveDraft();
+      renderDone(true);
+    });
+  }
+  formEl.addEventListener('submit', function(ev){
+    ev.preventDefault();
+    if (sendBtn.disabled) return;
+    readCards();
+    if (!validate()) { formMsg.textContent = 'Не хватает ответов — поля отмечены красным.'; return; }
+    formMsg.textContent = '';
+    submit(sendBtn, 'Отправить анкету');
+  });
+  retryBtn.addEventListener('click', function(){
+    if (retryBtn.disabled) return;
+    submit(retryBtn, 'Отправить ещё раз');
+  });
+
+  function renderDone(focus){
+    formEl.hidden = true; doneEl.hidden = false;
+    var s = state.saved;
+    doneEl.classList.toggle('unsent', !s);
+    doneH.textContent = s
+      ? (state.updated ? 'Ответ обновлён. Prost!' : 'Записано. Prost!')
+      : (CONFIGURED ? 'Анкета не отправилась' : 'Анкета готова — осталось отправить');
+    doneText.textContent = s
+      ? 'Ответ уже у меня. Жду вас 24 октября в 18:00 на Орбитальной, 90.'
+      : (CONFIGURED
+          ? 'Похоже, пропал интернет или сервер не ответил. Нажмите «Отправить ещё раз». Если не выйдет — скопируйте текст ниже и пришлите мне в Telegram.'
+          : 'Скопируйте текст ниже и пришлите мне в Telegram или любой другой мессенджер.');
+    doneList.innerHTML = state.entries.map(function(e){
+      var w = oneLine(e.wishes);
+      return '<li><b>' + esc(clean(e.name)) + '</b><span>' + esc(e.foam) + ' · ' + esc(e.strong) + '</span>' +
+        (w ? '<span>Пожелания: ' + esc(w) + '</span>' : '') + '</li>';
+    }).join('');
+    shareEl.hidden = s;
+    retryRow.hidden = s || !CONFIGURED;
+    if (!s) { var msg = buildMessage(state.entries); outEl.value = msg; tgEl.href = tgLink(msg); copyMsg.textContent = ''; }
+    if (focus) { doneEl.focus({preventScroll:true}); doneEl.scrollIntoView({block:'start', behavior: reduceMotion ? 'auto' : 'smooth'}); }
+  }
+  function showForm(focus){
+    doneEl.hidden = true; formEl.hidden = false; renderCards();
+    if (focus) { var f = document.getElementById('name-' + state.entries[0].id); if (f) { f.focus({preventScroll:true}); f.scrollIntoView({block:'center', behavior: reduceMotion ? 'auto' : 'smooth'}); } }
+  }
+  $('#copy-out').addEventListener('click', function(){
+    copyText(outEl.value, function(){ outEl.focus(); outEl.select(); }, copyMsg, 'Скопировано — вставьте текст в чат со мной.');
+  });
+  $('#edit').addEventListener('click', function(){ state.view = 'form'; saveDraft(); showForm(true); });
+  $('#again').addEventListener('click', function(){ state = fresh(); saveDraft(); showForm(true); });
+
+  /* ---------- старт ---------- */
+  var restored = loadDraft();
+  if (restored) state = restored;
+  if (state.view === 'done') renderDone(false); else showForm(false);
+})();
+</script>
+</body>
+</html>
