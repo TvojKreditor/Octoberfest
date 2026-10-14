@@ -1,8 +1,9 @@
 /**
  * Oktoberfest Birthday Party · 24.10.2026 — приём анкет гостей в Google Таблицу.
  *
- * Скрипт привязан к таблице (Расширения → Apps Script) и развёрнут как веб-приложение:
- * «Запуск от имени: Я», «У кого есть доступ: Все». Подробно — в README.md.
+ * Скрипт развёрнут как веб-приложение: «Запуск от имени: Я», «У кого есть доступ: Все».
+ * Работает и привязанным к таблице (Расширения → Apps Script), и отдельным проектом —
+ * тогда в SHEET_ID записан ID таблицы. Подробно — в README.md.
  *
  * Страница-приглашение шлёт POST (Content-Type: text/plain) с JSON:
  *   {
@@ -20,6 +21,9 @@
  * Чужие строки так не изменить: пара группа + id известна только той анкете, что их создала.
  * Ответ — JSON {ok: true}; страница по нему понимает, что анкета записана.
  */
+
+// ID таблицы из её адреса (…/spreadsheets/d/ЭТО_ID/edit). Пусто — скрипт привязан к таблице и берёт её сам.
+var SHEET_ID = '';
 
 var EVENT = 'oktoberfest-2026';
 var SHEET_ANSWERS = 'Ответы';
@@ -108,7 +112,7 @@ function doGet() {
  * ответы гостей не трогает.
  */
 function setup() {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var ss = book_();
   formatAnswers_(ensureSheets_());
   var summary = ss.getSheetByName(SHEET_SUMMARY);
   summary.clear();
@@ -121,6 +125,10 @@ function setup() {
     }
   });
   ss.setActiveSheet(ss.getSheetByName(SHEET_ANSWERS));
+}
+
+function book_() {
+  return SHEET_ID ? SpreadsheetApp.openById(SHEET_ID) : SpreadsheetApp.getActiveSpreadsheet();
 }
 
 /* ---------- чтение и проверка анкеты ---------- */
@@ -216,7 +224,7 @@ function json_(obj) {
 /* ---------- лист «Ответы» ---------- */
 
 function ensureSheets_() {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var ss = book_();
   var answers = ss.getSheetByName(SHEET_ANSWERS);
   if (!answers) answers = ss.insertSheet(SHEET_ANSWERS, 0);
   if (answers.getLastRow() === 0) formatAnswers_(answers);
