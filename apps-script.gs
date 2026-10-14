@@ -4,30 +4,48 @@
  * Скрипт привязан к таблице (Расширения → Apps Script) и развёрнут как веб-приложение:
  * «Запуск от имени: Я», «У кого есть доступ: Все». Подробно — в README.md.
  *
- * Страница-приглашение шлёт POST (Content-Type: text/plain, mode: no-cors) с JSON:
+ * Страница-приглашение шлёт POST (Content-Type: text/plain) с JSON:
  *   {
  *     "event": "oktoberfest-2026", "group": "<id анкеты>", "sentAt": "<ISO>",
- *     "entries": [ { "id", "name", "foam", "strong", "wishes", "filledBy", "createdAt", "updatedAt" }, … ],
+ *     "entries": [ {
+ *        "id", "name", "attend", "costume",
+ *        "beer": [..], "mugs", "cider", "contests", "beerFav",
+ *        "strong": [..], "how": [..], "pace", "strongFav", "mixers": [..],
+ *        "food": [..], "allergy", "music": [..], "wishes", "greeting",
+ *        "filledBy", "createdAt", "updatedAt" }, … ],
  *     "removedIds": [ "<id>", … ]
  *   }
  * Каждый человек — отдельная строка. Строка опознаётся по паре «группа + id»: повторная отправка
  * (гость нажал «Изменить ответ») обновляет свои строки, а removedIds удаляет убранных спутников.
  * Чужие строки так не изменить: пара группа + id известна только той анкете, что их создала.
- * Ответ — JSON {ok: true}; при mode: no-cors страница его не читает, он для проверки вручную.
+ * Ответ — JSON {ok: true}; страница по нему понимает, что анкета записана.
  */
 
 var EVENT = 'oktoberfest-2026';
 var SHEET_ANSWERS = 'Ответы';
 var SHEET_SUMMARY = 'Сводка';
-var HEADERS = ['Время', 'Имя', 'Пенное', 'Для тостов', 'Пожелания', 'Кто заполнил', 'Группа', 'Изменено', 'ID'];
-var COL_GROUP = 7;   // G
-var COL_ID = 9;      // I
+var HEADERS = ['Время', 'Имя', 'Придёт', 'Костюм', 'Пиво и сидр', 'Кружек по 0,5 л', 'Сидр', 'Конкурсы', 'Любимое пенное',
+  'Крепкое', 'Как пьёт', 'Темп', 'Любимое крепкое', 'Запивка', 'Еда', 'Аллергия', 'Музыка', 'Пожелания', 'Поздравление',
+  'Кто заполнил', 'Группа', 'Изменено', 'ID'];
+var COL_GROUP = 21;  // U
+var COL_ID = 23;     // W
 var MAX_ENTRIES = 12;
 var ID_RE = /^[A-Za-z0-9_-]{1,64}$/;
+var NO = 'Не смогу';
 
 // Те же варианты, что на странице, — по ним считается «Сводка».
-var FOAM = ['Пиво светлое', 'Пиво тёмное', 'Пиво пшеничное', 'Пиво безалкогольное', 'Сидр', 'Медовуха'];
-var STRONG = ['Водка', 'Ром', 'Джин', 'Виски или бренди', 'Коньяк', 'Вино белое', 'Вино красное', 'Только пенное'];
+var ATTEND = ['Да, буду!', 'Скорее да', NO];
+var COSTUME = ['В баварском костюме', 'Что-нибудь клетчатое', 'Как получится'];
+var BEER = ['Светлое пиво', 'Пшеничное пиво', 'Тёмное пиво', 'Нефильтрованное пиво', 'Октоберфестбир', 'Безалкогольное пиво',
+  'Сидр', 'Пуаре', 'Медовуха', 'Радлер', 'Белое вино', 'Красное вино', 'Игристое', 'Ничего из этого'];
+var CIDER = ['Сладкий', 'Полусладкий', 'Сухой'];
+var CONTESTS = ['Я в деле!', 'Посмотрю по настроению', 'Буду болеть за других'];
+var STRONG = ['Водка', 'Коньяк', 'Виски', 'Ром', 'Джин', 'Текила', 'Егермейстер', 'Шнапс', 'Настойка', 'Ликёр', 'Крепкое не пью'];
+var HOW = ['Шотами', 'Со льдом', 'С колой, тоником, соком', 'В коктейлях'];
+var PACE = ['Пара тостов', 'Как пойдёт', 'До утра!'];
+var MIXERS = ['Кола', 'Тоник', 'Сок', 'Морс', 'Лимонад', 'Минералка', 'Энергетик', 'Лимон и лайм'];
+var FOOD = ['Ем всё', 'Не ем свинину', 'Вегетарианец', 'Без острого', 'Есть аллергия'];
+var MUSIC = ['Баварские шлягеры', 'Поп', 'Рок', 'Русские хиты', 'Рэп', 'Электроника', '90-е и нулевые'];
 
 /** Приём анкеты со страницы. */
 function doPost(e) {
@@ -52,11 +70,13 @@ function doPost(e) {
     var rows = rowIndex_(sheet, group);
     var inserted = 0, updated = 0, fresh = [];
     entries.forEach(function (p) {
-      var values = [cell_(p.name), cell_(p.foam), cell_(p.strong), cell_(p.wishes), cell_(p.filledBy), group];
+      var values = [p.name, p.attend, p.costume, p.beer, p.mugs, p.cider, p.contests, p.beerFav,
+        p.strong, p.how, p.pace, p.strongFav, p.mixers, p.food, p.allergy, p.music, p.wishes, p.greeting,
+        p.filledBy].map(cell_).concat([group]);
       var r = rows[p.id];
       if (r) {
         // «Время» первой отправки не трогаем, отмечаем время изменения.
-        sheet.getRange(r, 2, 1, 8).setValues([values.concat([now, p.id])]);
+        sheet.getRange(r, 2, 1, values.length + 2).setValues([values.concat([now, p.id])]);
         updated++;
       } else {
         fresh.push([now].concat(values, ['', p.id]));
@@ -125,13 +145,28 @@ function readEntries_(list) {
     var person = {
       id: isId_(p.id) ? p.id : '',
       name: text_(p.name, 60),
-      foam: text_(p.foam, 60),
-      strong: text_(p.strong, 60),
-      wishes: text_(p.wishes, 500, true),
+      attend: ATTEND.indexOf(p.attend) >= 0 ? p.attend : '',
+      costume: text_(p.costume, 40),
+      beer: list_(p.beer),
+      mugs: mugs_(p.mugs),
+      cider: text_(p.cider, 40),
+      contests: text_(p.contests, 40),
+      beerFav: text_(p.beerFav, 80),
+      strong: list_(p.strong),
+      how: list_(p.how),
+      pace: text_(p.pace, 40),
+      strongFav: text_(p.strongFav, 80),
+      mixers: list_(p.mixers),
+      food: list_(p.food),
+      allergy: text_(p.allergy, 120),
+      music: list_(p.music),
+      wishes: text_(p.wishes, 600, true),
+      greeting: text_(p.greeting, 600, true),
       filledBy: text_(p.filledBy, 60)
     };
     if (!person.id) throw new Error('У анкеты №' + (i + 1) + ' нет id');
-    if (!person.name || !person.foam || !person.strong) throw new Error('Не заполнена анкета №' + (i + 1));
+    if (!person.name || !person.attend) throw new Error('Не заполнена анкета №' + (i + 1));
+    if (person.attend !== NO && (!person.beer || !person.strong)) throw new Error('Нет ответа про напитки в анкете №' + (i + 1));
     if (!byId[person.id]) order.push(person.id);
     byId[person.id] = person;   // повтор id в одной отправке — берём последний
   });
@@ -155,9 +190,23 @@ function text_(v, max, multiline) {
   return s.slice(0, max);
 }
 
+// Несколько вариантов из списка → одна ячейка «А, Б, В».
+function list_(v) {
+  var seen = {};
+  return (Array.isArray(v) ? v : []).slice(0, 20)
+    .map(function (x) { return text_(x, 40); })
+    .filter(function (x) { if (!x || seen[x]) return false; seen[x] = true; return true; })
+    .join(', ');
+}
+
+function mugs_(v) {
+  var n = Math.round(Number(v));
+  return n >= 1 && n <= 8 ? n : '';
+}
+
 // Текст, начинающийся с = + - @, таблица приняла бы за формулу — апостроф делает его просто текстом.
 function cell_(s) {
-  return /^[=+\-@]/.test(s) ? "'" + s : s;
+  return typeof s === 'string' && /^[=+\-@]/.test(s) ? "'" + s : s;
 }
 
 function json_(obj) {
@@ -176,15 +225,18 @@ function ensureSheets_() {
 }
 
 function formatAnswers_(sheet) {
+  if (sheet.getMaxColumns() < HEADERS.length) sheet.insertColumnsAfter(sheet.getMaxColumns(), HEADERS.length - sheet.getMaxColumns());
   sheet.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS])
-    .setFontWeight('bold').setBackground('#DCE8F6').setVerticalAlignment('middle');
+    .setFontWeight('bold').setBackground('#DCE8F6').setVerticalAlignment('middle').setWrap(true);
   sheet.setFrozenRows(1);
+  sheet.setFrozenColumns(2);
   sheet.getRange('A:A').setNumberFormat('dd.MM.yyyy HH:mm');
-  sheet.getRange('H:H').setNumberFormat('dd.MM.yyyy HH:mm');
-  sheet.getRange('A:I').setVerticalAlignment('top');
-  sheet.getRange('E:E').setWrap(true);
-  sheet.getRange('G:I').setFontColor('#8496AA');
-  [130, 160, 170, 160, 320, 150, 130, 130, 130].forEach(function (w, i) { sheet.setColumnWidth(i + 1, w); });
+  sheet.getRange('V:V').setNumberFormat('dd.MM.yyyy HH:mm');
+  sheet.getRange('A:W').setVerticalAlignment('top');
+  sheet.getRange('R:S').setWrap(true);
+  sheet.getRange('U:W').setFontColor('#8496AA');
+  [120, 140, 110, 150, 230, 80, 100, 150, 140, 200, 160, 100, 140, 180, 160, 140, 180, 300, 300, 130, 120, 120, 120]
+    .forEach(function (w, i) { sheet.setColumnWidth(i + 1, w); });
 }
 
 // Запас пустых строк снизу: строки удаляются по removedIds, а лист не может остаться без незакреплённых строк.
@@ -226,43 +278,59 @@ function buildSummary_(sheet) {
   var rows = [];
   var bold = [];
   var head = function (title) {
+    rows.push(['', '', '']);
     bold.push(rows.length + 1);
     rows.push([title, 'Человек', 'Кто']);
   };
-  var drinks = function (col, list) {
-    var first = rows.length + 1;
+  var col = function (c) { return A + c + '2:' + c; };
+  // Один вариант на человека — точное совпадение.
+  var single = function (c, list) {
     list.forEach(function (name) {
       var r = rows.length + 1;
-      rows.push([
-        name,
-        '=COUNTIF(' + A + col + ':' + col + ',A' + r + ')',
-        '=IFERROR(TEXTJOIN(", ",TRUE,FILTER(' + A + 'B:B,' + A + col + ':' + col + '=A' + r + ')),"")'
-      ]);
+      rows.push([name,
+        '=COUNTIF(' + col(c) + ',A' + r + ')',
+        '=IFERROR(TEXTJOIN(", ",TRUE,FILTER(' + col('B') + ',' + col(c) + '=A' + r + ')),"")']);
     });
-    var lastRow = rows.length;
-    rows.push([
-      'Другое',
-      '=MAX(COUNTA(' + A + col + ':' + col + ')-1-SUM(B' + first + ':B' + lastRow + '),0)',
-      ''
-    ]);
+  };
+  // Несколько вариантов в одной ячейке через запятую — ищем вхождение.
+  var multi = function (c, list) {
+    list.forEach(function (name) {
+      var r = rows.length + 1;
+      rows.push([name,
+        '=COUNTIF(' + col(c) + ',"*"&A' + r + '&"*")',
+        '=IFERROR(TEXTJOIN(", ",TRUE,FILTER(' + col('B') + ',ISNUMBER(SEARCH(A' + r + ',' + col(c) + ')))),"")']);
+    });
+  };
+  // Свободный текст — всё в одну объединённую ячейку, по строке на человека.
+  var merged = [];
+  var texts = function (title, c) {
+    rows.push(['', '', '']);
+    bold.push(rows.length + 1);
+    rows.push([title, '', '']);
+    merged.push(rows.length + 1);
+    rows.push(['=IFERROR(TEXTJOIN(CHAR(10),TRUE,FILTER(' + col('B') + '&": "&' + col(c) + ',' + col(c) + '<>"")),"—")', '', '']);
   };
 
   rows.push(['Сводка для закупки · Oktoberfest 24.10.2026', '', '']);
-  rows.push(['Гостей всего', '=MAX(COUNTA(' + A + 'B:B)-1,0)', '']);
-  rows.push(['', '', '']);
-  head('Пенное');
-  drinks('C', FOAM);
-  rows.push(['', '', '']);
-  head('Для тостов');
-  drinks('D', STRONG);
-  rows.push(['', '', '']);
-  bold.push(rows.length + 1);
-  rows.push(['Пожелания', '', '']);
-  var wishesRow = rows.length + 1;
-  rows.push([
-    '=IFERROR(FILTER(' + A + 'B:B&": "&' + A + 'E:E,' + A + 'E:E<>"",ROW(' + A + 'E:E)>1),"—")',
-    '', ''
-  ]);
+  rows.push(['Анкет (человек)', '=COUNTA(' + col('B') + ')', '']);
+  rows.push(['Придут точно или скорее', '=COUNTIF(' + col('C') + ',"' + ATTEND[0] + '")+COUNTIF(' + col('C') + ',"' + ATTEND[1] + '")', '']);
+  rows.push(['Пива и сидра, литров (по ответам)', '=SUM(' + col('F') + ')*0.5', '']);
+  head('Придёт'); single('C', ATTEND);
+  head('Пиво, сидр и лёгкое'); multi('E', BEER);
+  head('Сидр — какой'); single('G', CIDER);
+  head('Пивные конкурсы'); single('H', CONTESTS);
+  head('Крепкое'); multi('J', STRONG);
+  head('Как пьют крепкое'); multi('K', HOW);
+  head('Темп'); single('L', PACE);
+  head('Запивка и безалкогольное'); multi('N', MIXERS);
+  head('Еда'); multi('O', FOOD);
+  head('Музыка'); multi('Q', MUSIC);
+  head('Костюм'); single('D', COSTUME);
+  texts('Любимое пенное', 'I');
+  texts('Любимое крепкое', 'M');
+  texts('Аллергии', 'P');
+  texts('Пожелания', 'R');
+  texts('Поздравления', 'S');
 
   // Подписи — одним махом, формулы — по одной через setFormula: так их синтаксис
   // (английские имена функций, запятые) не зависит от языка таблицы.
@@ -275,16 +343,18 @@ function buildSummary_(sheet) {
     });
   });
   sheet.getRange(1, 1, labels.length, 3).setValues(labels);
+  merged.forEach(function (r) { sheet.getRange(r, 1, 1, 3).merge().setWrap(true); });
   formulas.forEach(function (f) { sheet.getRange(f[0], f[1]).setFormula(f[2]); });
 
   sheet.getRange(1, 1).setFontWeight('bold').setFontSize(13);
-  sheet.getRange(2, 1, 1, 2).setFontWeight('bold');
+  sheet.getRange(2, 1, 3, 2).setFontWeight('bold');
   bold.forEach(function (r) {
     sheet.getRange(r, 1, 1, 3).setFontWeight('bold').setBackground('#DCE8F6');
   });
-  sheet.getRange(1, 3, wishesRow - 1, 1).setWrap(true);
-  sheet.setColumnWidth(1, 220);
+  sheet.getRange(1, 1, labels.length, 3).setVerticalAlignment('top');
+  sheet.getRange(1, 3, labels.length, 1).setWrap(true);
+  sheet.setColumnWidth(1, 260);
   sheet.setColumnWidth(2, 90);
-  sheet.setColumnWidth(3, 360);
-  sheet.setFrozenRows(2);
+  sheet.setColumnWidth(3, 380);
+  sheet.setFrozenRows(4);
 }
