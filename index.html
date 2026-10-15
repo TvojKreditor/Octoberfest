@@ -96,7 +96,7 @@ h2{font:800 clamp(1.875rem,3.6vw,2.6rem)/1.1 var(--f-display);letter-spacing:.01
 .beerbar i{display:block;height:100%;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,#E39A1B,#FFD25A);box-shadow:0 2px 0 #FFFDF6}
 
 /* ===== герой ===== */
-.hero{position:relative;overflow:clip;padding-bottom:clamp(28px,5vw,56px);background:radial-gradient(120% 80% at 85% 30%,var(--hero-b) 0,transparent 60%),linear-gradient(180deg,var(--hero-a),var(--bg) 92%)}
+.hero{position:relative;overflow:hidden;overflow:clip;padding-bottom:clamp(28px,5vw,56px);background:radial-gradient(120% 80% at 85% 30%,var(--hero-b) 0,transparent 60%),linear-gradient(180deg,var(--hero-a),var(--bg) 92%)}
 .garland{position:relative;z-index:3}
 .garland svg{display:block;width:100%;height:auto;aspect-ratio:1200/96;min-height:64px}
 .g-rope{fill:none;stroke:var(--muted);stroke-width:2}
@@ -190,7 +190,7 @@ h2{font:800 clamp(1.875rem,3.6vw,2.6rem)/1.1 var(--f-display);letter-spacing:.01
 .t-links{display:flex;flex-wrap:wrap;align-items:center;gap:2px 16px;margin-top:6px;font-size:.9375rem}
 .t-status{font-size:.875rem;color:var(--ok)}
 .t-status:empty{display:none}
-.stamp{position:absolute;top:-16px;right:18px;transform:rotate(-7deg);font:800 .875rem/1 var(--f-display);letter-spacing:.16em;color:var(--blue);background:var(--bg);border:2px solid var(--blue);border-radius:4px;padding:6px 10px 5px}
+.stamp{position:absolute;top:-16px;right:18px;transform:rotate(-7deg);transform-origin:100% 50%;font:800 .875rem/1 var(--f-display);letter-spacing:.16em;color:var(--blue);background:var(--bg);border:2px solid var(--blue);border-radius:4px;padding:6px 10px 5px}
 .js .ticket .stamp{opacity:0;transform:rotate(-7deg) scale(2.4)}
 .ticket.in .stamp{animation:stamp .5s .55s cubic-bezier(.3,1.4,.5,1) forwards}
 @keyframes stamp{to{opacity:1;transform:rotate(-7deg) scale(1)}}
@@ -212,6 +212,7 @@ h2{font:800 clamp(1.875rem,3.6vw,2.6rem)/1.1 var(--f-display);letter-spacing:.01
 .menu li.in .ico path{stroke-dashoffset:0}
 .m-de{font:700 .9375rem/1.2 var(--f-display);letter-spacing:.04em;color:var(--ginger-text)}
 .m-ru{font-weight:500;line-height:1.35}
+.m-de,.m-ru{-webkit-hyphens:auto;hyphens:auto;overflow-wrap:break-word}
 .dress{margin-top:22px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px 24px;align-items:start;background:var(--blue-soft);border-radius:12px;padding:24px clamp(18px,3vw,32px)}
 .dress .ico{width:60px;height:60px}
 .dress h3{font:800 1.5rem/1.15 var(--f-display);margin-top:2px}
@@ -250,6 +251,7 @@ h2{font:800 clamp(1.875rem,3.6vw,2.6rem)/1.1 var(--f-display);letter-spacing:.01
 
 .wiz-who{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;padding:12px clamp(16px,3vw,28px);border-bottom:1px dashed var(--line);font-size:.9375rem;color:var(--muted)}
 .wiz-who b{color:var(--ink)}
+.wiz-note{padding:12px clamp(16px,3vw,28px);background:var(--sel);border-bottom:1px solid var(--line);font-size:.9375rem}
 .who-tag{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;background:var(--sel);color:var(--ink);font-weight:700}
 .wiz-body{padding:clamp(18px,3.4vw,34px) clamp(16px,3.4vw,34px) 8px}
 .panel{display:flex;flex-direction:column;gap:26px}
@@ -290,10 +292,10 @@ textarea.input{resize:vertical;min-height:104px}
 .tile input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
 .tile-t{min-width:0;display:flex;flex-direction:column;gap:2px}
 .tile-t small{font-size:.8125rem;color:var(--muted);font-weight:400}
-.tile:has(input:checked){background:var(--sel);border-color:var(--sel-line)}
-.tile:has(input:checked) .tile-t{font-weight:700}
-.tile:has(input:checked)::after{content:"";position:absolute;top:50%;right:12px;width:6px;height:12px;margin-top:-8px;border:solid var(--sel-line);border-width:0 2.5px 2.5px 0;transform:rotate(45deg);animation:tick .3s ease}
-.tile:has(input:checked) .sw{animation:pop .35s cubic-bezier(.3,1.6,.5,1)}
+.tile.is-on{background:var(--sel);border-color:var(--sel-line)}
+.tile.is-on .tile-t{font-weight:700}
+.tile.is-on::after{content:"";position:absolute;top:50%;right:12px;width:6px;height:12px;margin-top:-8px;border:solid var(--sel-line);border-width:0 2.5px 2.5px 0;transform:rotate(45deg);animation:tick .3s ease}
+.tile.is-on .sw{animation:pop .35s cubic-bezier(.3,1.6,.5,1)}
 .tile:has(input:focus-visible){outline:3px solid var(--blue);outline-offset:2px}
 .tile.none{border-style:dashed}
 @keyframes pop{0%{transform:scale(.6)}100%{transform:scale(1)}}
@@ -308,7 +310,7 @@ textarea.input{resize:vertical;min-height:104px}
 .invalid .input{border-color:var(--err)}
 .invalid .tile{border-color:var(--err)}
 @media (max-width:700px){.tiles.c3,.tiles.c4{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:460px){.tiles{gap:8px}.tile{min-height:50px;padding:8px 26px 8px 10px;gap:8px;font-size:1rem}.tile:has(input:checked)::after{right:10px}}
+@media (max-width:460px){.tiles{gap:8px}.tile{min-height:50px;padding:8px 26px 8px 10px;gap:8px;font-size:1rem}.tile.is-on::after{right:10px}}
 @media (max-width:340px){.tiles.c2,.tiles.c3,.tiles.c4{grid-template-columns:minmax(0,1fr)}}
 
 /* кружки-счётчик */
@@ -328,7 +330,7 @@ textarea.input{resize:vertical;min-height:104px}
 .mugs-out{font-weight:700;color:var(--ginger-text);min-height:1.5em}
 @media (max-width:460px){.mugs{gap:3px}.mugbtn{width:calc((100% - 21px) / 8);height:auto;aspect-ratio:46/54}}
 
-.wiz-nav{position:sticky;bottom:0;z-index:2;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding:14px clamp(16px,3.4vw,34px);margin-top:18px;background:color-mix(in srgb,var(--surface) 92%,transparent);backdrop-filter:blur(6px);border-top:1px solid var(--line)}
+.wiz-nav{position:sticky;bottom:0;z-index:2;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding:14px clamp(16px,3.4vw,34px);margin-top:18px;background:var(--surface);background:color-mix(in srgb,var(--surface) 92%,transparent);backdrop-filter:blur(6px);border-top:1px solid var(--line)}
 .wiz-nav .spacer{flex:1}
 .nav-msg{flex-basis:100%;order:-1;color:var(--err);font-weight:500}
 .nav-msg:empty{display:none}
@@ -365,6 +367,8 @@ textarea.input{resize:vertical;min-height:104px}
 .done-list li{display:flex;flex-direction:column;gap:2px;padding:12px 0;border-bottom:1px solid var(--line)}
 .done-list span{color:var(--muted);font-size:.9375rem}
 .share{display:flex;flex-direction:column;gap:10px}
+.why{font-size:.875rem;color:var(--muted)}
+.relay{display:flex;flex-direction:column;gap:10px;margin:6px 0;padding:16px;border:1.5px dashed var(--ring);border-radius:12px}
 .share .q{font-size:1rem}
 .mono{font:.9375rem/1.5 ui-monospace,"Cascadia Mono",Consolas,"Courier New",monospace;background:var(--surface-2)}
 .share-actions,.done-actions{display:flex;flex-wrap:wrap;gap:10px}
@@ -558,6 +562,7 @@ textarea.input{resize:vertical;min-height:104px}
           <ol class="steps" id="steps"></ol>
         </div>
         <div class="wiz-who" id="who" hidden></div>
+        <p class="wiz-note" id="link-note" role="status" hidden></p>
         <form id="form" novalidate aria-labelledby="form-h">
           <div class="wiz-body" id="wbody"></div>
           <div class="wiz-nav">
@@ -579,14 +584,26 @@ textarea.input{resize:vertical;min-height:104px}
           </div>
           <ul class="done-list" id="done-list"></ul>
           <div class="share" id="share" hidden>
+            <p class="why" id="why" hidden></p>
             <div class="share-actions" id="retry-row">
               <button type="button" class="btn btn-amber" id="retry">Отправить ещё раз</button>
             </div>
-            <label class="q" for="out">Текст для отправки в мессенджер</label>
+            <div class="relay">
+              <label class="q" for="link-out">Ссылка с вашими ответами</label>
+              <p class="hint" id="link-hint">Пришлите её мне в любой мессенджер: я открою её у себя и занесу ответы в таблицу одним нажатием. Заполнять заново не нужно.</p>
+              <input class="input mono" id="link-out" type="text" readonly aria-describedby="link-hint">
+              <div class="share-actions">
+                <button type="button" class="btn btn-ghost" id="copy-link">Скопировать ссылку</button>
+                <button type="button" class="btn btn-ghost" id="share-link" hidden>Поделиться…</button>
+                <a class="btn btn-ghost" id="tg" href="https://t.me/share/url" target="_blank" rel="noopener">Telegram</a>
+              </div>
+              <p class="status" id="link-msg" role="status"></p>
+              <p class="hint" id="inapp" hidden>Открыли приглашение во ВКонтакте, Telegram или другом приложении? Откройте эту страницу в Safari или Chrome (меню «⋯» → «Открыть в браузере»): ответы перенесутся сами, останется нажать «Отправить анкету».</p>
+            </div>
+            <label class="q" for="out">Или текстом — для любого мессенджера</label>
             <textarea class="input mono" id="out" rows="10" readonly></textarea>
             <div class="share-actions">
               <button type="button" class="btn btn-ghost" id="copy-out">Скопировать текст</button>
-              <a class="btn btn-ghost" id="tg" href="https://t.me/share/url" target="_blank" rel="noopener">Поделиться в Telegram</a>
             </div>
             <p class="status" id="copy-msg" role="status"></p>
           </div>
@@ -634,6 +651,10 @@ var SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxNhJ1nZyeWdcazQ0R
   var API = String(window.SHEET_ENDPOINT || '').trim();
   var CONFIGURED = /^https?:\/\/[^\s'"]+$/.test(API);
   var reduceMotion = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+  // Встроенный браузер приложения (ВКонтакте, Telegram, Instagram…): на iOS у него в User-Agent нет «Safari/».
+  var UA = navigator.userAgent || '';
+  var INAPP = /VKClient|vkontakte|com\.vk\.|VKAndroidApp|Telegram|Instagram|FBAN|FBAV|FB_IAB|MicroMessenger|OKApp|; wv\)/i.test(UA) ||
+    (/iPhone|iPad|iPod/.test(UA) && !/Safari\//.test(UA));
   document.documentElement.classList.add('js');
 
   function $(s, root){ return (root || document).querySelector(s); }
@@ -832,34 +853,45 @@ var SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxNhJ1nZyeWdcazQ0R
   var state = fresh();
 
   var ID_OK = /^[A-Za-z0-9]{4,40}$/;
+  // Только строка: ID_OK.test(undefined) проверил бы слово "undefined" и пропустил его.
+  function isId(v){ return typeof v === 'string' && ID_OK.test(v); }
+  // Анкеты из черновика или из ссылки: только известные поля, у каждого человека свой id.
+  function cleanPeople(list){
+    var seen = {};
+    return list.slice(0, MAX_PEOPLE).map(function(x){
+      var b = blank(); x = x || {};
+      Object.keys(b).forEach(function(k){
+        if (k === 'id') b.id = isId(x.id) && !seen[x.id] ? x.id : b.id;
+        else if (k === 'mugs') b.mugs = clamp(Math.round(+x.mugs || 0), 0, 8);
+        else if (ARR.indexOf(k) >= 0) b[k] = Array.isArray(x[k]) ? x[k].map(String).slice(0, 20) : [];
+        else b[k] = String(x[k] == null ? '' : x[k]);
+      });
+      seen[b.id] = true;
+      return b;
+    });
+  }
+  function hasAnswers(d){ return d.sentOnce || d.people.some(function(p){ return clean(p.name); }); }
   function loadDraft(){
     try {
       var raw = localStorage.getItem(DRAFT_KEY); if (!raw) return null;
       var d = JSON.parse(raw);
       if (!d || !Array.isArray(d.people) || !d.people.length) return null;
-      var people = d.people.slice(0, MAX_PEOPLE).map(function(x){
-        var b = blank(); x = x || {};
-        Object.keys(b).forEach(function(k){
-          if (k === 'id') b.id = ID_OK.test(x.id) ? x.id : b.id;
-          else if (k === 'mugs') b.mugs = clamp(Math.round(+x.mugs || 0), 0, 8);
-          else if (ARR.indexOf(k) >= 0) b[k] = Array.isArray(x[k]) ? x[k].map(String).slice(0, 20) : [];
-          else b[k] = String(x[k] == null ? '' : x[k]);
-        });
-        return b;
-      });
+      var people = cleanPeople(d.people);
       return {
         people: people,
         cur: clamp(+d.cur || 0, 0, people.length - 1),
         step: clamp(+d.step || 0, 0, SUMMARY),
         view: d.view === 'done' ? 'done' : 'wizard',
-        group: ID_OK.test(d.group) ? d.group : newId(),
-        savedIds: Array.isArray(d.savedIds) ? d.savedIds.filter(function(x){ return ID_OK.test(x); }) : [],
+        group: isId(d.group) ? d.group : newId(),
+        savedIds: Array.isArray(d.savedIds) ? d.savedIds.filter(isId) : [],
         saved: !!d.saved, sentOnce: !!d.sentOnce, updated: !!d.updated
       };
     } catch (e) { return null; }
   }
-  var draftT;
+  // noDraft: открыта чужая анкета по ссылке, а на этом устройстве есть своя — свой черновик не перезаписываем.
+  var draftT, noDraft = false, fromLink = false;
   function saveDraft(){
+    if (noDraft) return;
     clearTimeout(draftT);
     draftT = setTimeout(function(){ try { localStorage.setItem(DRAFT_KEY, JSON.stringify(state)); } catch (e) {} }, 250);
   }
@@ -868,6 +900,7 @@ var SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxNhJ1nZyeWdcazQ0R
   var backBtn = $('#back'), nextBtn = $('#next'), navMsg = $('#nav-msg');
   var doneEl = $('#done'), doneH = $('#done-h'), doneText = $('#done-text'), doneList = $('#done-list');
   var shareEl = $('#share'), outEl = $('#out'), tgEl = $('#tg'), copyMsg = $('#copy-msg'), retryRow = $('#retry-row'), retryBtn = $('#retry');
+  var whyEl = $('#why'), linkOut = $('#link-out'), linkMsg = $('#link-msg'), shareLinkBtn = $('#share-link'), inappEl = $('#inapp'), linkNote = $('#link-note');
 
   function person(){ return state.people[state.cur]; }
   function visibleSteps(p){ var a = []; STEPS.forEach(function(s, i){ if (!s.skip || !s.skip(p)) a.push(i); }); a.push(SUMMARY); return a; }
@@ -882,7 +915,7 @@ var SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxNhJ1nZyeWdcazQ0R
     return '<span class="sw' + (o.k === 'glass' ? ' sw-glass' : o.k === 'shot' ? ' sw-shot' : '') + '" style="--c:' + o.c + '"></span>';
   }
   function tile(type, name, o, on, extra){
-    return '<label class="tile' + (extra || '') + '"><input type="' + type + '" name="' + name + '" value="' + esc(o.v) + '"' + (on ? ' checked' : '') + '>' +
+    return '<label class="tile' + (extra || '') + (on ? ' is-on' : '') + '"><input type="' + type + '" name="' + name + '" value="' + esc(o.v) + '"' + (on ? ' checked' : '') + '>' +
       swatch(o) + '<span class="tile-t">' + esc(o.v) + (o.h ? '<small>' + esc(o.h) + '</small>' : '') + '</span></label>';
   }
   function mugIcon(k){
@@ -1086,6 +1119,7 @@ var SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxNhJ1nZyeWdcazQ0R
         if (x !== t && (t.value === q.none ? true : x.value === q.none)) x.checked = false;
       });
     }
+    if (t.type === 'checkbox' || t.type === 'radio') syncTiles(t.name);
     readField(f);
     var p = person();
     if (f === 'mugs') {
@@ -1098,6 +1132,12 @@ var SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxNhJ1nZyeWdcazQ0R
     if (q && q.req) { var fe = fieldError(q, p); if (!fe) showError(q, p, ''); }
     if (navMsg.textContent && !formEl.querySelector('.invalid')) navMsg.textContent = '';
     saveDraft();
+  }
+  // Отмеченная плитка подсвечивается классом, а не через :has() — так работает и в старых Safari и Android.
+  function syncTiles(name){
+    $$('input[name="' + name + '"]', formEl).forEach(function(x){
+      var l = x.closest('.tile'); if (l) l.classList.toggle('is-on', x.checked);
+    });
   }
   formEl.addEventListener('input', onEdit);
   formEl.addEventListener('change', onEdit);
@@ -1148,9 +1188,52 @@ var SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxNhJ1nZyeWdcazQ0R
     });
     return ['Oktoberfest Birthday Party — анкета', '24.10.2026, 18:00 · Орбитальная, 90', ''].join('\n') + blocks.join('\n\n');
   }
-  function tgLink(msg){
-    var lines = msg.split('\n');
-    return 'https://t.me/share/url?url=' + encodeURIComponent(lines[0]) + '&text=' + encodeURIComponent(lines.slice(1).join('\n'));
+  function tgLink(link, msg){
+    return 'https://t.me/share/url?url=' + encodeURIComponent(link) + '&text=' + encodeURIComponent(msg);
+  }
+
+  /* ---------- ссылка с ответами ----------
+     Вся анкета помещается в адрес после #otvet=. Если отправка не удалась, гость присылает мне эту ссылку,
+     я открываю её у себя — ответы подставляются, остаётся нажать «Отправить анкету». Группа и id те же,
+     поэтому повторная отправка обновит строки, а не задвоит их. Часть адреса после # на сервер не уходит. */
+  function packAnswers(){
+    var people = state.people.map(function(p){
+      var o = {};
+      Object.keys(p).forEach(function(k){
+        var v = p[k];
+        if (k !== 'createdAt' && (Array.isArray(v) ? v.length : v)) o[k] = v;
+      });
+      return o;
+    });
+    // Одинокая половинка эмодзи сломала бы encodeURIComponent — заменяем её на «�».
+    var json = JSON.stringify({g: state.group, p: people}).replace(/([\uD800-\uDBFF][\uDC00-\uDFFF])|[\uD800-\uDFFF]/g, function(m, pair){ return pair || '\uFFFD'; });
+    var b64 = btoa(unescape(encodeURIComponent(json)));
+    return b64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+  }
+  function unpackAnswers(code){
+    try {
+      var b64 = code.replace(/-/g, '+').replace(/_/g, '/');
+      while (b64.length % 4) b64 += '=';
+      var d = JSON.parse(decodeURIComponent(escape(atob(b64))));
+      if (!d || !Array.isArray(d.p) || !d.p.length) return null;
+      var people = cleanPeople(d.p);
+      if (!people.some(function(p){ return clean(p.name); })) return null;
+      return {group: isId(d.g) ? d.g : newId(), people: people};
+    } catch (e) { return null; }
+  }
+  function answersLink(){ return location.protocol + '//' + location.host + location.pathname + '#otvet=' + packAnswers(); }
+  function linkFromHash(){
+    var m = /[#&]otvet=([A-Za-z0-9_-]+)/.exec(location.hash);
+    return m ? unpackAnswers(m[1]) : null;
+  }
+  // Пока анкета не отправлена, ответы лежат и в адресе страницы: «Открыть в браузере» из ВКонтакте или Telegram
+  // перенесёт их в Safari или Chrome.
+  function setHash(on){
+    if (!window.history || !history.replaceState) return;
+    try {
+      if (on) history.replaceState(null, '', '#otvet=' + packAnswers());
+      else if (/otvet=/.test(location.hash)) history.replaceState(null, '', location.pathname + location.search);
+    } catch (e) {}
   }
 
   /* ---------- отправка в Google Таблицу ----------
@@ -1183,7 +1266,16 @@ var SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxNhJ1nZyeWdcazQ0R
       return r.json();
     }).then(function(res){ clearTimeout(timer); return res; }, function(err){ clearTimeout(timer); throw err; });
   }
+  // Причина сбоя простыми словами — гость может прислать её вместе со ссылкой.
+  function whyFailed(err){
+    if (!err) return 'неизвестная ошибка';
+    if (err.name === 'AbortError') return 'сервер Google не ответил за 25 секунд';
+    if (err.name === 'SyntaxError') return 'сервер прислал непонятный ответ';
+    if (/^HTTP /.test(err.message || '')) return 'сервер ответил ошибкой ' + err.message.slice(5);
+    return 'нет связи с сервером Google (' + (err.message || err.name || String(err)) + ')';
+  }
   function sendToSheet(){
+    state.why = '';
     if (!CONFIGURED) return Promise.resolve(false);
     var now = new Date().toISOString(), lead = clean(state.people[0].name);
     var keep = state.people.map(function(p){ return p.id; });
@@ -1201,10 +1293,11 @@ var SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxNhJ1nZyeWdcazQ0R
           state.savedIds = keep;
           return true;
         }
+        state.why = 'таблица ответила: ' + (res && res.error ? String(res.error).slice(0, 160) : 'без подтверждения');
         console.warn('Таблица не приняла анкету:', res && res.error);
         return false;
       })
-      .catch(function(err){ console.warn('Анкета не отправилась:', err && (err.message || err)); return false; });
+      .catch(function(err){ state.why = whyFailed(err); console.warn('Анкета не отправилась:', err && (err.message || err)); return false; });
   }
 
   function submit(btn, idle){
@@ -1231,7 +1324,7 @@ var SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxNhJ1nZyeWdcazQ0R
   retryBtn.addEventListener('click', function(){ if (!retryBtn.disabled) submit(retryBtn, 'Отправить ещё раз'); });
 
   function renderDone(focus){
-    formEl.hidden = true; whoEl.hidden = true; doneEl.hidden = false;
+    formEl.hidden = true; whoEl.hidden = true; linkNote.hidden = true; doneEl.hidden = false;
     state.step = SUMMARY; renderSteps();
     var s = state.saved;
     doneEl.classList.toggle('unsent', !s);
@@ -1239,10 +1332,10 @@ var SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxNhJ1nZyeWdcazQ0R
       ? (state.updated ? 'Ответ обновлён. Prost!' : 'Записано. Prost!')
       : (CONFIGURED ? 'Анкета не отправилась' : 'Анкета готова — осталось отправить');
     doneText.textContent = s
-      ? 'Ответ уже у меня. Жду вас 24 октября в 18:00 на Орбитальной, 90.'
+      ? (fromLink ? 'Ответы из ссылки записаны в таблицу.' : 'Ответ уже у меня. Жду вас 24 октября в 18:00 на Орбитальной, 90.')
       : (CONFIGURED
-          ? 'Похоже, пропал интернет или сервер не ответил. Нажмите «Отправить ещё раз». Если не выйдет — скопируйте текст ниже и пришлите мне в Telegram.'
-          : 'Скопируйте текст ниже и пришлите мне в Telegram или любой другой мессенджер.');
+          ? 'Похоже, пропал интернет или сервер не ответил. Нажмите «Отправить ещё раз». Если не выйдет — пришлите мне ссылку с ответами, она ниже.'
+          : 'Пришлите мне ссылку с ответами или текст ниже — в Telegram или любой другой мессенджер.');
     doneList.innerHTML = state.people.map(function(p, i){
       var g = going(p), bits = g ? [p.beer.join(', '), p.strong.join(', ')].filter(Boolean).join(' · ') : 'не сможет прийти';
       var w = oneLine(p.wishes);
@@ -1251,18 +1344,40 @@ var SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxNhJ1nZyeWdcazQ0R
     }).join('');
     shareEl.hidden = s;
     retryRow.hidden = s || !CONFIGURED;
-    if (!s) { var msg = buildMessage(state.people); outEl.value = msg; tgEl.href = tgLink(msg); copyMsg.textContent = ''; }
+    whyEl.hidden = s || !state.why;
+    whyEl.textContent = state.why ? 'Причина: ' + state.why + '.' : '';
+    if (!s) {
+      var link = answersLink(), msg = buildMessage(state.people);
+      linkOut.value = link;
+      outEl.value = msg + '\n\nСсылка, чтобы занести ответы в таблицу:\n' + link;
+      tgEl.href = tgLink(link, msg);
+      copyMsg.textContent = ''; linkMsg.textContent = '';
+      inappEl.hidden = !INAPP;
+    }
+    setHash(!s);
     if (focus) { doneEl.focus({preventScroll: true}); wiz.scrollIntoView({block: 'start', behavior: reduceMotion ? 'auto' : 'smooth'}); }
   }
   function showWizard(focus){
-    doneEl.hidden = true; formEl.hidden = false;
+    doneEl.hidden = true; formEl.hidden = false; linkNote.hidden = !fromLink;
     render(0, focus);
   }
   $('#copy-out').addEventListener('click', function(){
     copyText(outEl.value, function(){ outEl.focus(); outEl.select(); }, copyMsg, 'Скопировано — вставьте текст в чат со мной.');
   });
-  $('#edit').addEventListener('click', function(){ state.view = 'wizard'; state.cur = 0; state.step = SUMMARY; saveDraft(); showWizard(true); });
-  $('#again').addEventListener('click', function(){ state = fresh(); saveDraft(); showWizard(true); });
+  $('#copy-link').addEventListener('click', function(){
+    copyText(linkOut.value, function(){ linkOut.focus(); linkOut.setSelectionRange(0, linkOut.value.length); }, linkMsg, 'Ссылка скопирована — вставьте её в чат со мной.');
+  });
+  if (typeof navigator.share === 'function') shareLinkBtn.hidden = false;
+  shareLinkBtn.addEventListener('click', function(){
+    try { navigator.share({title: 'Анкета Oktoberfest', text: 'Мои ответы на анкету', url: linkOut.value}).catch(function(){}); } catch (e) {}
+  });
+  $('#edit').addEventListener('click', function(){ state.view = 'wizard'; state.cur = 0; state.step = SUMMARY; setHash(false); saveDraft(); showWizard(true); });
+  $('#again').addEventListener('click', function(){
+    setHash(false);
+    // Анкета из ссылки на чужом устройстве: «Новая анкета» возвращает к своей.
+    if (noDraft) { location.reload(); return; }
+    fromLink = false; state = fresh(); saveDraft(); showWizard(true);
+  });
 
   /* ---------- конфетти из баварских ромбиков ---------- */
   function confetti(){
@@ -1290,9 +1405,26 @@ var SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxNhJ1nZyeWdcazQ0R
   }
 
   /* ---------- старт ---------- */
-  var restored = loadDraft();
-  if (restored) state = restored;
-  if (state.view === 'done') renderDone(false); else render(0, false);
+  var restored = loadDraft(), linked = linkFromHash();
+  if (linked) {
+    // Открыта ссылка с ответами. Своя анкета этого устройства (другая группа) остаётся нетронутой.
+    var mine = !!restored && restored.group === linked.group;
+    noDraft = !!restored && !mine && hasAnswers(restored);
+    fromLink = true;
+    state = fresh();
+    state.people = linked.people; state.group = linked.group; state.step = SUMMARY;
+    if (mine) { state.savedIds = restored.savedIds; state.sentOnce = restored.sentOnce; }
+    linkNote.innerHTML = 'Ответы из ссылки: <b>' + esc(state.people.map(function(p, i){ return displayName(p, i); }).join(', ')) + '</b>. ' +
+      'Проверьте и нажмите «' + (state.sentOnce ? 'Отправить изменения' : 'Отправить анкету') + '».' +
+      (noDraft ? ' Ваша собственная анкета на этом устройстве не изменится.' : '');
+    linkNote.hidden = false;
+    if (!noDraft) { saveDraft(); setHash(false); }
+    render(0, false);
+    setTimeout(function(){ wiz.scrollIntoView({block: 'start'}); }, 80);
+  } else {
+    if (restored) state = restored;
+    if (state.view === 'done') renderDone(false); else render(0, false);
+  }
 })();
 </script>
 </body>
