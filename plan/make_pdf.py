@@ -26,6 +26,7 @@ FILES = [
     ('menu-i-zakupki.md', 'Oktoberfest — меню и закупки.pdf'),
     ('konkursy.md', 'Oktoberfest — конкурсы.pdf'),
     ('rulka.md', 'Oktoberfest — рулька.pdf'),
+    ('recepty.md', 'Oktoberfest — рецепты.pdf'),
 ]
 
 # Таблицы под этими заголовками — справочные, без галочек.
